@@ -1,6 +1,8 @@
 # Screenshots
 
-Add real screenshots here after running this project in Azure. Do not add fake or edited screenshots.
+This folder includes illustrative mock screenshots for portfolio layout preview. They are clearly watermarked and are not real Azure execution screenshots.
+
+After running the project in Azure, replace these mock images with real screenshots from your own Azure Data Factory, Azure SQL, and Logic Apps lab environment.
 
 Recommended files:
 
