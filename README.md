@@ -76,16 +76,13 @@ Then follow `docs/setup_azure_portal.md` to create Azure resources and import th
 ## 10. Monitoring and Troubleshooting
 Use ADF Monitor to review pipeline runs, activity runs, input/output details, and failures. The design includes an audit table and a Logic Apps webhook placeholder for failure notification.
 
-## 11. Screenshots
-Screenshots are not faked in this repository. Add screenshots to `docs/screenshots/` after running the project in Azure.
-
-## 12. Key Learnings
+## 11. Key Learnings
 - How to organize ADF assets in source control.
 - How metadata-driven ingestion works at a beginner level.
 - How Azure SQL staging, control, and audit tables support ETL operations.
 - Why secrets should be referenced through Key Vault placeholders instead of hardcoded.
 
-## 13. Future Improvements
+## 12. Future Improvements
 - Add parameterized file archive handling.
 - Add stronger data quality checks in SQL.
 - Add more sample file types and folder partitions.
