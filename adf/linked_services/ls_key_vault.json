@@ -1,0 +1,10 @@
+{
+  "name": "ls_key_vault",
+  "properties": {
+    "type": "AzureKeyVault",
+    "description": "Azure Key Vault linked service using placeholder vault name.",
+    "typeProperties": {
+      "baseUrl": "https://<key-vault-name>.vault.azure.net/"
+    }
+  }
+}

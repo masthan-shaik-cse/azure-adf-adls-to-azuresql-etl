@@ -1,0 +1,293 @@
+{
+  "name": "pl_ingest_multiformat_to_sql",
+  "properties": {
+    "description": "Metadata-driven retail ingestion pipeline template for CSV, JSON, and Parquet files.",
+    "parameters": {
+      "p_load_date": {
+        "type": "String"
+      },
+      "p_source_system": {
+        "type": "String",
+        "defaultValue": "retail"
+      },
+      "p_environment": {
+        "type": "String",
+        "defaultValue": "dev"
+      }
+    },
+    "activities": [
+      {
+        "name": "Lookup active retail sources",
+        "type": "Lookup",
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "sqlReaderQuery": "SELECT source_name, file_type, source_folder_path, source_file_name, target_schema, target_table FROM meta.source_control WHERE active_flag = 1"
+          },
+          "dataset": {
+            "referenceName": "ds_azure_sql_table",
+            "type": "DatasetReference",
+            "parameters": {
+              "p_schema_name": "meta",
+              "p_table_name": "source_control"
+            }
+          },
+          "firstRowOnly": false
+        }
+      },
+      {
+        "name": "ForEach active source",
+        "type": "ForEach",
+        "dependsOn": [
+          {
+            "activity": "Lookup active retail sources",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "typeProperties": {
+          "items": {
+            "value": "@activity('Lookup active retail sources').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "name": "Check file type",
+              "type": "IfCondition",
+              "typeProperties": {
+                "expression": {
+                  "value": "@equals(item().file_type, 'csv')",
+                  "type": "Expression"
+                },
+                "ifTrueActivities": [
+                  {
+                    "name": "Copy CSV to SQL",
+                    "type": "Copy",
+                    "typeProperties": {
+                      "source": {
+                        "type": "DelimitedTextSource"
+                      },
+                      "sink": {
+                        "type": "AzureSqlSink",
+                        "writeBehavior": "insert"
+                      }
+                    },
+                    "inputs": [
+                      {
+                        "referenceName": "ds_customers_csv",
+                        "type": "DatasetReference",
+                        "parameters": {
+                          "p_folder_path": {
+                            "value": "@item().source_folder_path",
+                            "type": "Expression"
+                          },
+                          "p_file_name": {
+                            "value": "@item().source_file_name",
+                            "type": "Expression"
+                          }
+                        }
+                      }
+                    ],
+                    "outputs": [
+                      {
+                        "referenceName": "ds_azure_sql_table",
+                        "type": "DatasetReference",
+                        "parameters": {
+                          "p_schema_name": {
+                            "value": "@item().target_schema",
+                            "type": "Expression"
+                          },
+                          "p_table_name": {
+                            "value": "@item().target_table",
+                            "type": "Expression"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "ifFalseActivities": [
+                  {
+                    "name": "Check JSON file type",
+                    "type": "IfCondition",
+                    "typeProperties": {
+                      "expression": {
+                        "value": "@equals(item().file_type, 'json')",
+                        "type": "Expression"
+                      },
+                      "ifTrueActivities": [
+                        {
+                          "name": "Copy JSON to SQL",
+                          "type": "Copy",
+                          "typeProperties": {
+                            "source": {
+                              "type": "JsonSource"
+                            },
+                            "sink": {
+                              "type": "AzureSqlSink",
+                              "writeBehavior": "insert"
+                            }
+                          },
+                          "inputs": [
+                            {
+                              "referenceName": "ds_orders_json",
+                              "type": "DatasetReference",
+                              "parameters": {
+                                "p_folder_path": {
+                                  "value": "@item().source_folder_path",
+                                  "type": "Expression"
+                                },
+                                "p_file_name": {
+                                  "value": "@item().source_file_name",
+                                  "type": "Expression"
+                                }
+                              }
+                            }
+                          ],
+                          "outputs": [
+                            {
+                              "referenceName": "ds_azure_sql_table",
+                              "type": "DatasetReference",
+                              "parameters": {
+                                "p_schema_name": {
+                                  "value": "@item().target_schema",
+                                  "type": "Expression"
+                                },
+                                "p_table_name": {
+                                  "value": "@item().target_table",
+                                  "type": "Expression"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "ifFalseActivities": [
+                        {
+                          "name": "Copy Parquet to SQL",
+                          "type": "Copy",
+                          "typeProperties": {
+                            "source": {
+                              "type": "ParquetSource"
+                            },
+                            "sink": {
+                              "type": "AzureSqlSink",
+                              "writeBehavior": "insert"
+                            }
+                          },
+                          "inputs": [
+                            {
+                              "referenceName": "ds_payments_parquet",
+                              "type": "DatasetReference",
+                              "parameters": {
+                                "p_folder_path": {
+                                  "value": "@item().source_folder_path",
+                                  "type": "Expression"
+                                }
+                              }
+                            }
+                          ],
+                          "outputs": [
+                            {
+                              "referenceName": "ds_azure_sql_table",
+                              "type": "DatasetReference",
+                              "parameters": {
+                                "p_schema_name": {
+                                  "value": "@item().target_schema",
+                                  "type": "Expression"
+                                },
+                                "p_table_name": {
+                                  "value": "@item().target_table",
+                                  "type": "Expression"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Write audit success",
+              "type": "SqlServerStoredProcedure",
+              "dependsOn": [
+                {
+                  "activity": "Check file type",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ],
+              "typeProperties": {
+                "storedProcedureName": "[audit].[usp_upsert_pipeline_audit]",
+                "storedProcedureParameters": {
+                  "pipeline_name": {
+                    "value": "pl_ingest_multiformat_to_sql",
+                    "type": "String"
+                  },
+                  "run_id": {
+                    "value": "@pipeline().RunId",
+                    "type": "String"
+                  },
+                  "source_name": {
+                    "value": "@item().source_name",
+                    "type": "String"
+                  },
+                  "target_table": {
+                    "value": "@concat(item().target_schema,'.',item().target_table)",
+                    "type": "String"
+                  },
+                  "rows_copied": {
+                    "value": "0",
+                    "type": "Int64"
+                  },
+                  "status": {
+                    "value": "Succeeded",
+                    "type": "String"
+                  },
+                  "error_message": {
+                    "value": "",
+                    "type": "String"
+                  }
+                }
+              },
+              "linkedServiceName": {
+                "referenceName": "ls_azure_sql_database",
+                "type": "LinkedServiceReference"
+              }
+            },
+            {
+              "name": "Notify failure via Logic Apps",
+              "type": "WebActivity",
+              "dependsOn": [
+                {
+                  "activity": "Check file type",
+                  "dependencyConditions": [
+                    "Failed"
+                  ]
+                }
+              ],
+              "typeProperties": {
+                "url": "<logic-app-webhook-url>",
+                "method": "POST",
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "pipelineName": "pl_ingest_multiformat_to_sql",
+                  "runId": "@pipeline().RunId",
+                  "sourceName": "@item().source_name",
+                  "environment": "@pipeline().parameters.p_environment"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

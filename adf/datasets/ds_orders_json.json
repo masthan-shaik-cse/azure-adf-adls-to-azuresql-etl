@@ -1,0 +1,33 @@
+{
+  "name": "ds_orders_json",
+  "properties": {
+    "linkedServiceName": {
+      "referenceName": "ls_adls_gen2",
+      "type": "LinkedServiceReference"
+    },
+    "description": "Parameterized JSON dataset for retail orders.",
+    "parameters": {
+      "p_folder_path": {
+        "type": "String"
+      },
+      "p_file_name": {
+        "type": "String"
+      }
+    },
+    "type": "Json",
+    "typeProperties": {
+      "location": {
+        "type": "AzureBlobFSLocation",
+        "fileName": {
+          "value": "@dataset().p_file_name",
+          "type": "Expression"
+        },
+        "folderPath": {
+          "value": "@dataset().p_folder_path",
+          "type": "Expression"
+        },
+        "fileSystem": "<container-name>"
+      }
+    }
+  }
+}

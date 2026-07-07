@@ -1,0 +1,29 @@
+{
+  "name": "tr_daily_retail_ingestion",
+  "properties": {
+    "type": "ScheduleTrigger",
+    "description": "Daily trigger template for retail ingestion. Keep disabled until configured.",
+    "typeProperties": {
+      "recurrence": {
+        "frequency": "Day",
+        "interval": 1,
+        "startTime": "2026-01-01T02:00:00Z",
+        "timeZone": "UTC"
+      }
+    },
+    "pipelines": [
+      {
+        "pipelineReference": {
+          "referenceName": "pl_ingest_multiformat_to_sql",
+          "type": "PipelineReference"
+        },
+        "parameters": {
+          "p_load_date": "@formatDateTime(utcNow(),'yyyy-MM-dd')",
+          "p_source_system": "retail",
+          "p_environment": "dev"
+        }
+      }
+    ],
+    "runtimeState": "Stopped"
+  }
+}

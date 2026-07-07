@@ -1,0 +1,37 @@
+{
+  "name": "ds_customers_csv",
+  "properties": {
+    "linkedServiceName": {
+      "referenceName": "ls_adls_gen2",
+      "type": "LinkedServiceReference"
+    },
+    "description": "Parameterized CSV dataset for retail customers.",
+    "parameters": {
+      "p_folder_path": {
+        "type": "String"
+      },
+      "p_file_name": {
+        "type": "String"
+      }
+    },
+    "type": "DelimitedText",
+    "typeProperties": {
+      "location": {
+        "type": "AzureBlobFSLocation",
+        "fileName": {
+          "value": "@dataset().p_file_name",
+          "type": "Expression"
+        },
+        "folderPath": {
+          "value": "@dataset().p_folder_path",
+          "type": "Expression"
+        },
+        "fileSystem": "<container-name>"
+      },
+      "columnDelimiter": ",",
+      "firstRowAsHeader": true,
+      "quoteChar": "\"",
+      "escapeChar": "\\"
+    }
+  }
+}

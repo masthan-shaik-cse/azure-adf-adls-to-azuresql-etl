@@ -1,0 +1,26 @@
+{
+  "name": "ds_payments_parquet",
+  "properties": {
+    "linkedServiceName": {
+      "referenceName": "ls_adls_gen2",
+      "type": "LinkedServiceReference"
+    },
+    "description": "Parameterized Parquet dataset for retail payments.",
+    "parameters": {
+      "p_folder_path": {
+        "type": "String"
+      }
+    },
+    "type": "Parquet",
+    "typeProperties": {
+      "location": {
+        "type": "AzureBlobFSLocation",
+        "folderPath": {
+          "value": "@dataset().p_folder_path",
+          "type": "Expression"
+        },
+        "fileSystem": "<container-name>"
+      }
+    }
+  }
+}

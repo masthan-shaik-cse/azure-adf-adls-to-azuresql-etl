@@ -1,0 +1,29 @@
+{
+  "name": "ds_azure_sql_table",
+  "properties": {
+    "linkedServiceName": {
+      "referenceName": "ls_azure_sql_database",
+      "type": "LinkedServiceReference"
+    },
+    "description": "Parameterized Azure SQL table dataset.",
+    "parameters": {
+      "p_schema_name": {
+        "type": "String"
+      },
+      "p_table_name": {
+        "type": "String"
+      }
+    },
+    "type": "AzureSqlTable",
+    "typeProperties": {
+      "schema": {
+        "value": "@dataset().p_schema_name",
+        "type": "Expression"
+      },
+      "table": {
+        "value": "@dataset().p_table_name",
+        "type": "Expression"
+      }
+    }
+  }
+}

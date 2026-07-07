@@ -1,0 +1,18 @@
+{
+  "name": "ls_azure_sql_database",
+  "properties": {
+    "type": "AzureSqlDatabase",
+    "description": "Azure SQL Database linked service using Key Vault placeholder for password.",
+    "typeProperties": {
+      "connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=<server-name>.database.windows.net;Initial Catalog=<database-name>;User ID=<sql-user-name>",
+      "password": {
+        "type": "AzureKeyVaultSecret",
+        "store": {
+          "referenceName": "ls_key_vault",
+          "type": "LinkedServiceReference"
+        },
+        "secretName": "<sql-password-secret-name>"
+      }
+    }
+  }
+}
