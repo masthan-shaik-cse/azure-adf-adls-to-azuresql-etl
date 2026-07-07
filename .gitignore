@@ -1,0 +1,17 @@
+.env
+*.env
+secrets/
+*.key
+*.pem
+*.pfx
+*.crt
+*.sqlite
+*.db
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+.vscode/settings.json
+local_config.json
+generated_large_files/
+*.log
