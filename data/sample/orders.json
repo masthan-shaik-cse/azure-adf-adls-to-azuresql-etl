@@ -1,0 +1,162 @@
+[
+  {
+    "order_id": "ORD0001",
+    "customer_id": "CUST001",
+    "order_date": "2025-04-01",
+    "order_status": "Shipped",
+    "order_channel": "Mobile",
+    "order_amount": 936.45
+  },
+  {
+    "order_id": "ORD0002",
+    "customer_id": "CUST002",
+    "order_date": "2025-04-02",
+    "order_status": "Created",
+    "order_channel": "Store",
+    "order_amount": 1073.9
+  },
+  {
+    "order_id": "ORD0003",
+    "customer_id": "CUST003",
+    "order_date": "2025-04-03",
+    "order_status": "Delivered",
+    "order_channel": "Mobile",
+    "order_amount": 1211.35
+  },
+  {
+    "order_id": "ORD0004",
+    "customer_id": "CUST004",
+    "order_date": "2025-04-04",
+    "order_status": "Cancelled",
+    "order_channel": "Web",
+    "order_amount": 1348.8
+  },
+  {
+    "order_id": "ORD0005",
+    "customer_id": "CUST005",
+    "order_date": "2025-04-05",
+    "order_status": "Delivered",
+    "order_channel": "Mobile",
+    "order_amount": 1486.25
+  },
+  {
+    "order_id": "ORD0006",
+    "customer_id": "CUST006",
+    "order_date": "2025-04-06",
+    "order_status": "Shipped",
+    "order_channel": "Store",
+    "order_amount": 1623.7
+  },
+  {
+    "order_id": "ORD0007",
+    "customer_id": "CUST007",
+    "order_date": "2025-04-07",
+    "order_status": "Created",
+    "order_channel": "Mobile",
+    "order_amount": 1761.15
+  },
+  {
+    "order_id": "ORD0008",
+    "customer_id": "CUST008",
+    "order_date": "2025-04-08",
+    "order_status": "Delivered",
+    "order_channel": "Web",
+    "order_amount": 1898.6
+  },
+  {
+    "order_id": "ORD0009",
+    "customer_id": "CUST009",
+    "order_date": "2025-04-09",
+    "order_status": "Cancelled",
+    "order_channel": "Mobile",
+    "order_amount": 2036.05
+  },
+  {
+    "order_id": "ORD0010",
+    "customer_id": "CUST010",
+    "order_date": "2025-04-10",
+    "order_status": "Delivered",
+    "order_channel": "Store",
+    "order_amount": 2173.5
+  },
+  {
+    "order_id": "ORD0011",
+    "customer_id": "CUST011",
+    "order_date": "2025-04-11",
+    "order_status": "Shipped",
+    "order_channel": "Mobile",
+    "order_amount": 2310.95
+  },
+  {
+    "order_id": "ORD0012",
+    "customer_id": "CUST012",
+    "order_date": "2025-04-12",
+    "order_status": "Created",
+    "order_channel": "Web",
+    "order_amount": 2448.4
+  },
+  {
+    "order_id": "ORD0013",
+    "customer_id": "CUST013",
+    "order_date": "2025-04-13",
+    "order_status": "Delivered",
+    "order_channel": "Mobile",
+    "order_amount": 2585.85
+  },
+  {
+    "order_id": "ORD0014",
+    "customer_id": "CUST014",
+    "order_date": "2025-04-14",
+    "order_status": "Cancelled",
+    "order_channel": "Store",
+    "order_amount": 2723.3
+  },
+  {
+    "order_id": "ORD0015",
+    "customer_id": "CUST015",
+    "order_date": "2025-04-15",
+    "order_status": "Delivered",
+    "order_channel": "Mobile",
+    "order_amount": 2860.75
+  },
+  {
+    "order_id": "ORD0016",
+    "customer_id": "CUST001",
+    "order_date": "2025-04-16",
+    "order_status": "Shipped",
+    "order_channel": "Web",
+    "order_amount": 2998.2
+  },
+  {
+    "order_id": "ORD0017",
+    "customer_id": "CUST002",
+    "order_date": "2025-04-17",
+    "order_status": "Created",
+    "order_channel": "Mobile",
+    "order_amount": 3135.65
+  },
+  {
+    "order_id": "ORD0018",
+    "customer_id": "CUST003",
+    "order_date": "2025-04-18",
+    "order_status": "Delivered",
+    "order_channel": "Store",
+    "order_amount": 3273.1
+  },
+  {
+    "order_id": "ORD0019",
+    "customer_id": "CUST004",
+    "order_date": "2025-04-19",
+    "order_status": "Cancelled",
+    "order_channel": "Mobile",
+    "order_amount": 3410.55
+  },
+  {
+    "order_id": "ORD0020",
+    "customer_id": "CUST005",
+    "order_date": "2025-04-20",
+    "order_status": "Delivered",
+    "order_channel": "Web",
+    "order_amount": 3548.0
+  }
+]
