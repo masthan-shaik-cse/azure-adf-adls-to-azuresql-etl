@@ -44,35 +44,29 @@ The dataset is synthetic retail data:
 
 No real customer data is used.
 
-### Analytics Output Images & Artifacts
-This section shows sample analytical outputs generated from the synthetic retail ingestion data. These visuals help explain what the ADF pipeline is expected to validate after loading data into Azure SQL staging tables.
+### Analytics Dashboards & Artifacts
+This section contains dashboard-style outputs generated from the synthetic retail ingestion data. These visuals help explain what the ADF pipeline is expected to validate after loading data into Azure SQL staging tables.
 
 ---
 
 #### Retail Ingestion Row Count Output
 Shows the expected source-level row counts for customers, orders, and payments. This is useful for validating whether the ADF copy activities loaded the expected number of records.
 
-<p align="center">
-  <img src="docs/output_images/retail-ingestion-row-counts.png" alt="Retail ingestion row counts" width="900">
-</p>
+![Retail ingestion row counts](docs/output_images/retail-ingestion-row-counts.png)
 
 ---
 
 #### Retail Orders by Status Output
 Summarizes order status distribution from the synthetic order file. This helps interviewers understand how the loaded order data can be checked before reporting.
 
-<p align="center">
-  <img src="docs/output_images/retail-orders-by-status.png" alt="Retail orders by status" width="900">
-</p>
+![Retail orders by status](docs/output_images/retail-orders-by-status.png)
 
 ---
 
 #### Retail Order Amount by Channel Output
 Compares total order amount by sales channel. This represents a simple business validation that can be performed after ingestion into Azure SQL.
 
-<p align="center">
-  <img src="docs/output_images/retail-order-amount-by-channel.png" alt="Retail order amount by channel" width="900">
-</p>
+![Retail order amount by channel](docs/output_images/retail-order-amount-by-channel.png)
 
 ## 7. Processing Flow
 1. Generate small sample files locally.
