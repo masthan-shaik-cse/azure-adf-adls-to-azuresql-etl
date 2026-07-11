@@ -44,6 +44,15 @@ The dataset is synthetic retail data:
 
 No real customer data is used.
 
+### Output Images
+These charts are generated from the synthetic retail sample data included in this repository.
+
+![Retail ingestion row counts](docs/output_images/retail-ingestion-row-counts.png)
+
+![Retail orders by status](docs/output_images/retail-orders-by-status.png)
+
+![Retail order amount by channel](docs/output_images/retail-order-amount-by-channel.png)
+
 ## 7. Processing Flow
 1. Generate small sample files locally.
 2. Upload sample files to ADLS Gen2 or Blob Storage.
