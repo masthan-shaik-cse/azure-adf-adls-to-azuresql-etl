@@ -26,6 +26,9 @@ Source files are placed in ADLS Gen2 or Blob Storage. Azure Data Factory reads a
 
 See `docs/architecture.md` for the text architecture diagram.
 
+### End-to-End System Architecture
+![ADF ETL Architecture Flow](docs/architecture_diagrams/adf-etl-flow.png)
+
 ## 5. Folder Structure
 ```text
 adf/                         ADF linked service, dataset, pipeline, and trigger templates
